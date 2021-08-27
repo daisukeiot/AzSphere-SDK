@@ -46,6 +46,7 @@ RUN yes y | ./install_azure_sphere_sdk.sh -f
 #
 # Clean up
 #
+WORKDIR /app
 RUN rm -rf /tmp/*
 
 #

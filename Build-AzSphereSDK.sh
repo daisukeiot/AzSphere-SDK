@@ -12,7 +12,7 @@ if [ $# -ne 3 ]
 fi
 [ "$DEBUG" ] && set -x
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
-clear
+# clear
 
 MY_REGISTRY=$1
 BASE_TAG=$2
@@ -27,12 +27,13 @@ if docker inspect --type=image $TAG > /dev/null 2>&1; then
 fi
 
 echo ''
-echo '    ____        _ __    __   _____ __             __ '
-echo '   / __ )__  __(_) /___/ /  / ___// /_____ ______/ /_'
-echo '  / __  / / / / / / __  /   \__ \/ __/ __ `/ ___/ __/'
-echo ' / /_/ / /_/ / / / /_/ /   ___/ / /_/ /_/ / /  / /_  '
-echo '/_____/\__,_/_/_/\__,_/   /____/\__/\__,_/_/   \__/  '
-echo ''
+echo " █████  ███████ ██    ██ ██████  ███████     ███████ ██████  ██   ██ ███████ ██████  ███████ ";
+echo "██   ██    ███  ██    ██ ██   ██ ██          ██      ██   ██ ██   ██ ██      ██   ██ ██      ";
+echo "███████   ███   ██    ██ ██████  █████       ███████ ██████  ███████ █████   ██████  █████   ";
+echo "██   ██  ███    ██    ██ ██   ██ ██               ██ ██      ██   ██ ██      ██   ██ ██      ";
+echo "██   ██ ███████  ██████  ██   ██ ███████     ███████ ██      ██   ██ ███████ ██   ██ ███████ ";
+echo "                                                                                             ";
+echo ""
 echo "Image Tag        : ${TAG}"
 echo "Base Image       : ${TAG_BASE}"
 echo "Azure Sphere SDK : ${SDK_VER}"
@@ -40,16 +41,16 @@ echo ''
 #
 # Install Azure Sphere SDK to Ubuntu Base Image
 #
-docker build --squash --rm -f ${SCRIPT_DIR}/AzSphereSDK/Dockerfile -t ${TAG} \
+# docker build --squash --rm -f ${SCRIPT_DIR}/AzSphereSDK/Dockerfile -t ${TAG} \
+docker build --rm -f ${SCRIPT_DIR}/AzSphereSDK/Dockerfile -t ${TAG} \
   --build-arg SDK_VERSION=${SDK_VER} \
   --build-arg OS_TAG=${TAG_BASE} \
   ${SCRIPT_DIR}
 
-echo $'\n###############################################################################'
-echo ''
+echo $'\n####################################################################################'
 echo "Azure Sphere SDK : ${SDK_VER}"
 echo "Image Tag        : ${TAG}"
-echo ''
+echo $'\n####################################################################################'
 #
 # Check if the image exists or not
 #
@@ -58,10 +59,10 @@ if ! docker inspect --type=image $TAG > /dev/null 2>&1; then
     exit
 fi
 
-echo $'\n###############################################################################'
-echo 'CTLC+C to cancel docker push'
-echo $'###############################################################################\n'
-read -t 10
-echo "Pushing Image : ${TAG}"
-echo ''
-docker push ${TAG}
+# echo $'\n###############################################################################'
+# echo 'CTLC+C to cancel docker push'
+# echo $'###############################################################################\n'
+# read -t 10
+# echo "Pushing Image : ${TAG}"
+# echo ''
+# docker push ${TAG}

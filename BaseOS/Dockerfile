@@ -34,7 +34,6 @@ RUN apt-get update && \
                 xz-utils \
                 findutils \
                 expect \
-                sudo \
                 udev \
                 file \
                 libcap2-bin \
