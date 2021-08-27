@@ -55,14 +55,6 @@ if ! docker inspect --type=image $TAG > /dev/null 2>&1; then
     exit
 fi
 
-echo $'\n###############################################################################'
-echo 'CTLC+C to cancel docker push'
-echo $'###############################################################################\n'
-read -t 10
-echo "Pushing Image : ${TAG}"
-echo ''
-docker push ${TAG}
-
 docker create -it --name imagepackage ${TAG} /bin/bash
 docker cp imagepackage:/app/HelloWorld_HighLevelApp.imagepackage HelloWorld_HighLevelApp.imagepackage
 docker rm -f imagepackage
